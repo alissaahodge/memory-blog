@@ -19,5 +19,9 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
         paddingTop:'35%',
         paddingLeft:'10%'
+    },
+    cardRoot:{
+        padding: '40px',
+
     }
 }));

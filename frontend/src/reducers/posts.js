@@ -1,17 +1,19 @@
 import {FETCH_ALL, CREATE, UPDATE, DELETE, LIKE_POST} from "../constants/actionTypes";
+import {useSelector} from "react-redux";
 
 export default (posts = [], action) => {
     switch (action.type) {
         case FETCH_ALL :
-            return action.payload;
+            return Object.values(action.payload);
         case CREATE :
-            return [...posts, action.payload];
+            return [...Object.values(posts), action.payload];
         case UPDATE :
-            return posts.map((post) => post._id === action.payload._id ? action.payload : post);
+            return Object.values(posts).map((post) => post._id === action.payload._id ? action.payload : post);
         case LIKE_POST :
-            return posts.map((post) => post._id === action.payload._id ? action.payload : post);
+            return Object.values(posts).map((post) => post._id === action.payload._id ? action.payload : post);
         case DELETE :
-            return posts.filter((post) => post._id !== action.payload._id);
+            posts = Object.values(posts).filter((post) => post._id !== action.payload._id);
+            return Object.assign({}, posts)
         default:
             return posts;
     }
