@@ -19,10 +19,10 @@ const Form = ({currentId, setCurrentId}) => {
         if (post) {
             setPostData(post)
         }
-        if(currentId){
-             setExpanded(true);
+        if (currentId) {
+            setExpanded(true);
         }
-    }, [post,currentId]);
+    }, [post, currentId]);
 
     const handleAccordianExpansion = () => {
         setExpanded(!expanded);
@@ -34,7 +34,6 @@ const Form = ({currentId, setCurrentId}) => {
         if (currentId === 0 || currentId == null) {
             dispatch(createPosts(postData));
         } else {
-            console.log('going here', currentId);
             dispatch(updatePost(currentId, postData));
         }
         clear();
@@ -50,10 +49,12 @@ const Form = ({currentId, setCurrentId}) => {
         <AccordionSummary
             aria-controls="panel1c-content"
             id="panel1c-header"
-        >{expanded===false && <Button className={classes.buttonSubmit} color="primary" variant="contained" size="large"
-                 fullWidth onClick={handleAccordianExpansion}>Create Blog Post</Button>}
-                 {expanded===true && <Button textAlign="right" className={classes.buttonSubmit}
-                  onClick={handleAccordianExpansion}><CloseIcon/></Button>}</AccordionSummary>
+        >{expanded === false &&
+        <Button className={classes.buttonSubmit} color="primary" variant="contained" size="large"
+                fullWidth onClick={handleAccordianExpansion}>Create Blog Post</Button>}
+
+            {expanded === true && <Button textAlign="right" className={classes.buttonClose}
+                                          onClick={handleAccordianExpansion}><CloseIcon/></Button>}</AccordionSummary>
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} Your Blog Post</Typography>
@@ -69,11 +70,12 @@ const Form = ({currentId, setCurrentId}) => {
                 <FileBase type="file" multiple={false}
                           onDone={({base64}) => setPostData({...postData, selectedFile: base64})}/>
             </form>
-
-            <Button className={classes.buttonSubmit} color="primary" variant="contained" size="large" type="submit"
-                    fullWidth onClick={handleSubmit}>Submit</Button>
-            <Button className={classes.buttonSubmit} color="secondary" variant="contained" size="small" type="submit"
-                    fullWidth onClick={clear}>Clear</Button>
+            <br/>
+                <Button className={classes.buttonSubmit} color="primary" variant="contained" size="large" type="submit"
+                        fullWidth onClick={handleSubmit}>Submit</Button>
+                <Button className={classes.buttonSubmit} color="secondary" variant="contained" size="small"
+                        type="submit"
+                        fullWidth onClick={clear}>Clear</Button>
         </Paper></Accordion>
 };
 export default Form;

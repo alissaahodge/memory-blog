@@ -3,7 +3,7 @@
 # dependencies
 /frontend/node_modules
 /backend/node_modules
-/frontend/src/constants/environment
+/frontend/src/constants/environment.js
 /.pnp
 .pnp.js
 
