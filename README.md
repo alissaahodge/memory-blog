@@ -9,7 +9,9 @@ This project was done to continue strengthening my skills/knowledge in react but
 ## How To Run The Project 
 
 ### Frontend:
-In the frontend directory, you can run:
+Navigate to frontend/src/constants and create a file called `environment.js` pattern after file example.environment.js file.
+
+Then In the frontend directory, you can run:
 
 #### `npm start`
 
