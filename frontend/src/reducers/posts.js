@@ -1,5 +1,4 @@
 import {FETCH_ALL, CREATE, UPDATE, DELETE, LIKE_POST} from "../constants/actionTypes";
-import {useSelector} from "react-redux";
 
 export default (posts = [], action) => {
     switch (action.type) {

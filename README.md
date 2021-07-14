@@ -4,7 +4,9 @@ This project was built on the MERN stack. (MongoDb, Express ,React, Node)
 ## About This Project
 
 This is a blogging website where users can create an account, login, upload a photo, some details/body of their blog post and also tags. You can receive likes on these posts. 
-This project was done to continue strengthening my skills/knowledge in react but in future I will continue adding on to this site.
+This project was done to continue strengthening my skills/knowledge in React but in future I will continue adding on to this project.
+
+Ps. This can also be used as a base for other MERN stack projects as it has Authentication (JWT & Google Auth) and other pieces that would be used when starting up a MERN project.
 
 ## How To Run The Project 
 
