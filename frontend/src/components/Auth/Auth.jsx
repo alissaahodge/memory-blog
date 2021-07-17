@@ -94,7 +94,7 @@ const Auth = () => {
                     </Button>)}
                                  onSuccess={googleSuccess} onFailure={googleFailure} cookiePolicy="single_host_origin"
                     />
-                    <Grid container justify="flex-end">
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Button className={classes.switchButton}
                                     onClick={switchMode}>{isSignup ? 'Already Have an Account?' : 'Dont Have An Account? Sign up'}</Button>
