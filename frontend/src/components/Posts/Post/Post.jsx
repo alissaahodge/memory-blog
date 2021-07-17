@@ -5,9 +5,9 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcone from '@material-ui/icons/MoreHoriz';
-import moment from 'moment';
 import {useDispatch} from "react-redux";
 import {deletePost, likePost} from "../../../actions/posts";
+import ConfirmDialog from '../../Shared/ConfirmDialog/ConfirmDialog';
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
@@ -52,7 +52,8 @@ const Post = ({post, setCurrentId}) => {
             <Typography variant="h6">{post.name}</Typography>
             <Typography body="body2"> {new Date(post.createdAt).toDateString()}</Typography>
         </div>
-                   {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && <div className={classes.overlay2} align="right">
+        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
+        <div className={classes.overlay2} align="right">
             <Button style={{color: 'white'}} size="small" onClick={handleMenuOpen}>
                 <MoreHorizIcone fontSize="medium"/>
             </Button>
@@ -70,7 +71,7 @@ const Post = ({post, setCurrentId}) => {
                 }}>Edit</MenuItem>
             </Menu>
 
-        </div> }
+        </div>}
         <div className={classes.details}>
             <Typography body="body2" color="textSecondary"> {post.tags.map((tag) => `# ${tag} `)}</Typography>
         </div>
@@ -86,9 +87,13 @@ const Post = ({post, setCurrentId}) => {
                 <Likes/>
             </Button>
             {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
-            <Button size="small" onClick={() => dispatch(deletePost(post._id))} color="primary">
-                <DeleteIcon fontSize="small"/>&nbsp;
-                Remove</Button>}
+
+                <ConfirmDialog
+                    dialogText="Are You Sure You Want to Remove This?"
+                    okBtnText="Yes" cancelBtnTxt="No" openState={false}
+                    color="primary" size="small"
+                    removeFunction={() => dispatch(deletePost(post._id))} id={post._id} dialogBtnTxt={<><DeleteIcon fontSize="small"/>&nbsp;Remove</>}/>
+                }
 
 
         </CardActions>
