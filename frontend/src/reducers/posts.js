@@ -11,8 +11,7 @@ export default (posts = [], action) => {
         case LIKE_POST :
             return Object.values(posts).map((post) => post._id === action.payload._id ? action.payload : post);
         case DELETE :
-            posts = Object.values(posts).filter((post) => post._id !== action.payload._id);
-            return Object.assign({}, posts)
+            return Object.values(posts).filter((post) => post._id !== action.payload);
         default:
             return posts;
     }

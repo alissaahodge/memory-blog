@@ -49,7 +49,7 @@ const Form = ({currentId, setCurrentId}) => {
     };
 if(!user?.result?.firstName && !user?.result?.lastName){
 return(<Paper className={classes.paper}>
-    <Typography variant="h6" align="center"> Please Sign In To Create Your Own Memories and Like Other Memories.</Typography>
+   <br/> <Typography variant="h6" align="center"> Please Sign In To Create Your Own Memories and Like Other Memories.</Typography><br/>
 </Paper>);
 }
     return <Accordion expanded={expanded}>

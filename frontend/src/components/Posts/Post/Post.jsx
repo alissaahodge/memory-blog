@@ -8,6 +8,7 @@ import MoreHorizIcone from '@material-ui/icons/MoreHoriz';
 import {useDispatch} from "react-redux";
 import {deletePost, likePost} from "../../../actions/posts";
 import ConfirmDialog from '../../Shared/ConfirmDialog/ConfirmDialog';
+import dummyFile from "../../../assets/images/dummy-file.png";
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
@@ -47,7 +48,7 @@ const Post = ({post, setCurrentId}) => {
 
 
     return <Card className={classes.card}>
-        <CardMedia className={classes.media} image={post.selectedFile} title={post.title}/>
+        <CardMedia className={classes.media} image={post.selectedFile|| dummyFile} title={post.title}/>
         <div className={classes.overlay}>
             <Typography variant="h6">{post.name}</Typography>
             <Typography body="body2"> {new Date(post.createdAt).toDateString()}</Typography>

@@ -24,16 +24,18 @@ export default makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-end !important',
         width: '400px',
-        textAlign:'right',
-        alignItems:'flex-end'
+        textAlign: 'right',
+        alignItems: 'flex-end'
     }, profile: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         width: '400px',
     },
     userName: {
         display: 'flex',
         alignItems: 'center',
+        paddingLeft:'30px',
+        paddingRight:'57px'
     },
     brandContainer: {
         display: 'flex',
