@@ -1,6 +1,16 @@
 import React, {useState} from 'react';
 import useStyles from './styles';
-import {Card, CardContent, Typography, CardActions, CardMedia, Button, Menu, MenuItem} from "@material-ui/core";
+import {
+    Card,
+    CardContent,
+    Typography,
+    CardActions,
+    CardMedia,
+    Button,
+    Menu,
+    MenuItem,
+    ButtonBase
+} from "@material-ui/core";
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -9,10 +19,12 @@ import {useDispatch} from "react-redux";
 import {deletePost, likePost} from "../../../actions/posts";
 import ConfirmDialog from '../../Shared/ConfirmDialog/ConfirmDialog';
 import dummyFile from "../../../assets/images/dummy-file.png";
+import {useHistory} from 'react-router-dom';
 
 const Post = ({post, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const [openMenu, setOpenMenu] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const user = JSON.parse(localStorage.getItem('profile'))
@@ -46,40 +58,47 @@ const Post = ({post, setCurrentId}) => {
         setAnchorEl(null);
     };
 
+    const openPost = () => history.push(`/posts/${post._id}`);
 
-    return <Card className={classes.card}>
-        <CardMedia className={classes.media} image={post.selectedFile|| dummyFile} title={post.title}/>
-        <div className={classes.overlay}>
-            <Typography variant="h6">{post.name}</Typography>
-            <Typography body="body2"> {new Date(post.createdAt).toDateString()}</Typography>
-        </div>
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
-        <div className={classes.overlay2} align="right">
-            <Button style={{color: 'white'}} size="small" onClick={handleMenuOpen}>
-                <MoreHorizIcone fontSize="medium"/>
-            </Button>
+    return <Card className={classes.card} raised elevation={6}>
+                    {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
+            <div className={classes.overlay2} align="right">
+                <Button style={{color: 'white'}} size="small" onClick={handleMenuOpen}>
+                    <MoreHorizIcone fontSize="medium"/>
+                </Button>
 
-            <Menu
-                id="simple-menu"
-                keepMounted
-                anchorEl={anchorEl}
-                open={openMenu}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={() => {
-                    setCurrentId(post._id);
-                    handleMenuOpen();
-                }}>Edit</MenuItem>
-            </Menu>
+                <Menu
+                    id="simple-menu"
+                    keepMounted
+                    anchorEl={anchorEl}
+                    open={openMenu}
+                    onClose={handleClose}
+                >
+                    <MenuItem onClick={() => {
+                        setCurrentId(post._id);
+                        handleMenuOpen();
+                    }}>Edit</MenuItem>
+                </Menu>
 
-        </div>}
-        <div className={classes.details}>
-            <Typography body="body2" color="textSecondary"> {post.tags.map((tag) => `# ${tag} `)}</Typography>
-        </div>
-        <Typography className={classes.title} variant="h5" gutterBottom> {post.title}</Typography>
-        <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p" gutterBottom> {post.message}</Typography>
-        </CardContent>
+            </div>}
+        <ButtonBase className={classes.cardAction} onClick={openPost}>
+            <CardMedia className={classes.media} image={post.selectedFile || dummyFile} title={post.title}/>
+            <div className={classes.overlay}>
+                <Typography variant="h6">{post.name}</Typography>
+                <Typography body="body2"> {new Date(post.createdAt).toDateString()}</Typography>
+            </div>
+
+
+
+
+            <div className={classes.details}>
+                <Typography body="body2" color="textSecondary"> {post.tags.map((tag) => `# ${tag} `)}</Typography>
+            </div>
+            <Typography className={classes.title} variant="h5" gutterBottom> {post.title}</Typography>
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p"
+                            gutterBottom> {post.message}</Typography>
+            </CardContent></ButtonBase>
         <CardActions className={classes.cardActions}>
             <Button size="small" onClick={() => {
                 dispatch(likePost(post._id))
@@ -89,12 +108,13 @@ const Post = ({post, setCurrentId}) => {
             </Button>
             {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
 
-                <ConfirmDialog
-                    dialogText="Are You Sure You Want to Remove This?"
-                    okBtnText="Yes" cancelBtnTxt="No" openState={false}
-                    color="primary" size="small"
-                    removeFunction={() => dispatch(deletePost(post._id))} id={post._id} dialogBtnTxt={<><DeleteIcon fontSize="small"/>&nbsp;Remove</>}/>
-                }
+            <ConfirmDialog
+                dialogText="Are You Sure You Want to Remove This?"
+                okBtnText="Yes" cancelBtnTxt="No" openState={false}
+                color="primary" size="small"
+                removeFunction={() => dispatch(deletePost(post._id))} id={post._id}
+                dialogBtnTxt={<><DeleteIcon fontSize="small"/>&nbsp;Remove</>}/>
+            }
 
 
         </CardActions>

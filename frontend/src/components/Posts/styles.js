@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
     },
     cardRoot:{
         padding: '40px',
+         textAlign: 'center',
 
     }
 }));

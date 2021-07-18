@@ -1,19 +1,49 @@
-import {FETCH_ALL, CREATE, UPDATE, DELETE, LIKE_POST} from "../constants/actionTypes";
+import {
+    FETCH_ALL,
+    CREATE,
+    UPDATE,
+    DELETE,
+    LIKE_POST,
+    FETCH_BY_SEARCH,
+    START_LOADING,
+    END_LOADING,
+    FETCH_POST
+} from "../constants/actionTypes";
 
-export default (posts = [], action) => {
+export default (state = {isLoading: true, posts: []}, action) => {
     switch (action.type) {
+        case START_LOADING:
+            return {...state, isLoading: true};
+        case END_LOADING:
+            return {...state, isLoading: false};
+
         case FETCH_ALL :
-            return Object.values(action.payload);
+            return {
+                ...state,
+                posts: Object.values(action.payload.data),
+                currentPage: action.payload.currentPage,
+                numberOfPages: action.payload.numberOfPages
+            };
+        case FETCH_POST:
+            return {...state, post: action.payload};
+        case FETCH_BY_SEARCH :
+            return {...state, posts: Object.values(action.payload)};
         case CREATE :
-            return [...Object.values(posts), action.payload];
+            return {...state, posts: [...Object.values(state.posts), action.payload]};
         case UPDATE :
-            return Object.values(posts).map((post) => post._id === action.payload._id ? action.payload : post);
+            return {
+                ...state,
+                posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
+            };
         case LIKE_POST :
-            return Object.values(posts).map((post) => post._id === action.payload._id ? action.payload : post);
+            return {
+                ...state,
+                posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
+            };
         case DELETE :
-            return Object.values(posts).filter((post) => post._id !== action.payload);
+            return {...state, posts: Object.values(state.posts).filter((post) => post._id !== action.payload)};
         default:
-            return posts;
+            return state;
     }
 
 }

@@ -7,14 +7,17 @@ import CloseIcon from '@material-ui/icons/Close';
 import FileBase from 'react-file-base64';
 import {useDispatch, useSelector} from "react-redux";
 import {createPosts, updatePost} from "../../actions/posts";
+import {useHistory} from 'react-router-dom';
 
 const Form = ({currentId, setCurrentId}) => {
     const classes = useStyles();
     const [postData, setPostData] = useState({tags: '', title: '', message: '', selectedFile: ''});
     const [expanded, setExpanded] = useState(false);
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+    const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
     const user = JSON.parse(localStorage.getItem('profile'))
     const dispatch = useDispatch();
+    const history = useHistory();
+
     useEffect(() => {
         if (post) {
             setPostData(post)
@@ -32,7 +35,7 @@ const Form = ({currentId, setCurrentId}) => {
         e.preventDefault();
 
         if (currentId === 0 || currentId == null) {
-            dispatch(createPosts({...postData, name: `${user?.result?.firstName} ${user?.result?.lastName}`}));
+            dispatch(createPosts({...postData, name: `${user?.result?.firstName} ${user?.result?.lastName}`}, history ));
         } else {
             dispatch(updatePost(currentId, {
                 ...postData,
@@ -47,11 +50,12 @@ const Form = ({currentId, setCurrentId}) => {
         setExpanded(false);
 
     };
-if(!user?.result?.firstName && !user?.result?.lastName){
-return(<Paper className={classes.paper}>
-   <br/> <Typography variant="h6" align="center"> Please Sign In To Create Your Own Memories and Like Other Memories.</Typography><br/>
-</Paper>);
-}
+    if (!user?.result?.firstName && !user?.result?.lastName) {
+        return (<Paper className={classes.paper}>
+            <br/> <Typography variant="h6" align="center" color="textSecondary"> Please Sign In To Create Your Own
+            Memories and Like Other Memories.</Typography><br/>
+        </Paper>);
+    }
     return <Accordion expanded={expanded}>
         <AccordionSummary
             aria-controls="panel1c-content"
@@ -62,7 +66,7 @@ return(<Paper className={classes.paper}>
 
             {expanded === true && <Button align="right" className={classes.buttonClose}
                                           onClick={handleAccordianExpansion}><CloseIcon/></Button>}</AccordionSummary>
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={6}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} Your Blog Post</Typography>
                 <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title}
