@@ -13,7 +13,7 @@ export const getPosts = async (req, res) => {
         const total = await PostMessage.countDocuments({});
         const posts = await PostMessage.find().sort({_id: -1}).limit(limit).skip(startIndex);
 
-        res.status(200).json({data: posts, currentPage: Number(page), numberOfPages:Math.ceil(total/limit)});
+        res.status(200).json({data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / limit)});
     } catch (error) {
         res.status(404).json({message: error.message});
     }
@@ -88,6 +88,17 @@ export const likePosts = async (req, res) => {
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
     res.json(updatedPost)
+
+};
+
+export const commentPost = async (req, res) => {
+    const {id} = req.params;
+    const {value} = req.body;
+    const post = await PostMessage.findById(id);
+    post.comments.push(value);
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
+    res.json(updatedPost)
+
 
 };
 

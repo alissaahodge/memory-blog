@@ -7,7 +7,8 @@ import {
     FETCH_BY_SEARCH,
     START_LOADING,
     END_LOADING,
-    FETCH_POST
+    FETCH_POST,
+    COMMENT_POST
 } from "../constants/actionTypes";
 
 export default (state = {isLoading: true, posts: []}, action) => {
@@ -37,6 +38,11 @@ export default (state = {isLoading: true, posts: []}, action) => {
             };
         case LIKE_POST :
             return {
+                ...state,
+                posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
+            };
+        case COMMENT_POST:
+            return{
                 ...state,
                 posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
             };

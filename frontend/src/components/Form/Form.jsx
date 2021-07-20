@@ -35,7 +35,7 @@ const Form = ({currentId, setCurrentId}) => {
         e.preventDefault();
 
         if (currentId === 0 || currentId == null) {
-            dispatch(createPosts({...postData, name: `${user?.result?.firstName} ${user?.result?.lastName}`}, history ));
+            dispatch(createPosts({...postData, name: `${user?.result?.firstName} ${user?.result?.lastName}`}, history));
         } else {
             dispatch(updatePost(currentId, {
                 ...postData,
