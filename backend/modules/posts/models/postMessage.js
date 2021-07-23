@@ -13,7 +13,7 @@ const postSchema = mongoose.Schema({
 
     },
     comments: {
-        type: [String],
+        type: [Object],
         default: []
     },
     createdAt: {

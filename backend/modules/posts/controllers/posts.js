@@ -1,5 +1,7 @@
 import express from 'express';
 import PostMessage from "../models/postMessage.js";
+import PostComment from "../models/postComment.js";
+
 import mongoose from 'mongoose';
 
 const router = express.Router();
@@ -24,7 +26,7 @@ export const getPost = async (req, res) => {
 
     try {
         const post = await PostMessage.findById(id);
-
+          post.comments = await PostComment.find({postId: id});
         res.status(200).json(post);
     } catch (error) {
         res.status(404).json({message: error.message});

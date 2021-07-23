@@ -3,7 +3,7 @@ import {Pagination, PaginationItem} from "@material-ui/lab";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from 'react-router-dom';
 import useStyles from './styles';
-import {getPosts} from "../../../actions/posts";
+import {getPosts} from "../../../store/actions/posts";
 
 const Paginate = ({page}) => {
     const classes = useStyles();

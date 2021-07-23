@@ -8,8 +8,8 @@ import {
     START_LOADING,
     END_LOADING,
     FETCH_POST,
-    COMMENT_POST
-} from "../constants/actionTypes";
+    COMMENT_POST, CREATE_POST_COMMENT, DELETE_POST_COMMENT
+} from "../../constants/actionTypes";
 
 export default (state = {isLoading: true, posts: []}, action) => {
     switch (action.type) {
@@ -36,18 +36,32 @@ export default (state = {isLoading: true, posts: []}, action) => {
                 ...state,
                 posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
             };
+        case DELETE :
+            return {...state, posts: Object.values(state.posts).filter((post) => post._id !== action.payload)};
         case LIKE_POST :
             return {
                 ...state,
                 posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
             };
         case COMMENT_POST:
-            return{
+            return {
                 ...state,
                 posts: Object.values(state.posts).map((post) => post._id === action.payload._id ? action.payload : post)
             };
-        case DELETE :
-            return {...state, posts: Object.values(state.posts).filter((post) => post._id !== action.payload)};
+        case CREATE_POST_COMMENT:
+            return {
+                ...state,
+                post: {...state.post, comments: [...Object.values(state.post.comments), action.payload]}
+            };
+
+        case DELETE_POST_COMMENT :
+            return {
+                ...state,
+                post: {
+                    ...state.post, comments: (state.post.comments).filter((comment) => comment._id !== action.payload)
+                }
+            };
+
         default:
             return state;
     }

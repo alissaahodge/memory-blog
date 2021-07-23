@@ -5,11 +5,11 @@ import {useDispatch} from "react-redux";
 import {useHistory, useLocation} from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 
-import {getPosts, getPostsBySearch} from "../../actions/posts";
-import Pagination from '../Shared/Pagination/Pagination';
+import {getPosts, getPostsBySearch} from "../../store/actions/posts";
+import Pagination from '../../components/Shared/Pagination/Pagination';
 import Posts from "../Posts/Posts";
-import Form from "../Form/Form";
-import TagsInput from "../Shared/UI/TagsInput/TagsInput";
+import Form from "../../components/Form/Form";
+import TagsInput from "../../components/Shared/UI/TagsInput/TagsInput";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);

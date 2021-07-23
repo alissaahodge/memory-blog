@@ -5,7 +5,7 @@ import moment from 'moment';
 import { useParams, useHistory } from 'react-router-dom';
 
 import CommentSection from './CommentSection/CommentSection';
-import { getPost, getPostsBySearch } from '../../actions/posts';
+import { getPost, getPostsBySearch } from '../../store/actions/posts';
 import useStyles from './styles';
 import dummyFile from "../../assets/images/dummy-file.png";
 
@@ -15,15 +15,13 @@ const Post = () => {
   const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
-
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
 
   useEffect(() => {
     if (post) {
-        console.log(post)
-      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+      dispatch(getPostsBySearch({ search: 'none', tags: post?.tags?.join(',') }));
     }
   }, [post]);
 
@@ -46,12 +44,12 @@ const Post = () => {
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">{post.title}</Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post?.tags?.map((tag) => `#${tag} `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
+          {/*<Divider style={{ margin: '20px 0' }} />*/}
+          {/*<Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>*/}
           <Divider style={{ margin: '20px 0' }} />
           <CommentSection post={post}/>
           <Divider style={{ margin: '20px 0' }} />

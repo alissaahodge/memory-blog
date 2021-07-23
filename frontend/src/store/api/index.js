@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BACKEND_API} from '../constants/environment';
+import {BACKEND_API} from '../../constants/environment';
 
 const API = axios.create({baseUrl: BACKEND_API});
 
@@ -18,6 +18,10 @@ export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updated
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const commentPost = (value,id) => API.post(`/posts/${id}/commentPost`, {value});
+
+export const fetchComments = (id) => API.get(`/posts/${id}/comments`);
+export const createComment = (newComment) => API.post('/posts/comment', newComment);
+export const deleteComment = (id) => API.delete(`/posts/comments/${id}`);
 
 export const signIn = (formData) => API.post('/users/signin', formData);
 export const signUp = (formData) => API.post('/users/signup', formData);

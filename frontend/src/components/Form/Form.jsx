@@ -6,15 +6,16 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import CloseIcon from '@material-ui/icons/Close';
 import FileBase from 'react-file-base64';
 import {useDispatch, useSelector} from "react-redux";
-import {createPosts, updatePost} from "../../actions/posts";
+import {createPosts, updatePost} from "../../store/actions/posts";
 import {useHistory} from 'react-router-dom';
 
 const Form = ({currentId, setCurrentId}) => {
     const classes = useStyles();
-    const [postData, setPostData] = useState({tags: '', title: '', message: '', selectedFile: ''});
+    const initialState = {tags: '', title: '', message: '', selectedFile: ''};
+    const [postData, setPostData] = useState(initialState);
     const [expanded, setExpanded] = useState(false);
     const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
-    const user = JSON.parse(localStorage.getItem('profile'))
+    const user = JSON.parse(localStorage.getItem('profile'));
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -46,7 +47,7 @@ const Form = ({currentId, setCurrentId}) => {
     };
     const clear = () => {
         setCurrentId(null);
-        setPostData({tags: '', title: '', message: '', selectedFile: ''});
+        setPostData(initialState);
         setExpanded(false);
 
     };

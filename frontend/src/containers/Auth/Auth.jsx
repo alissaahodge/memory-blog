@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {GoogleLogin} from "react-google-login";
 import Icon from './Icon';
 import Input from './Input';
-import {signin, signup} from '../../actions/auth';
+import {signin, signup} from '../../store/actions/auth';
 const Auth = () => {
     const initialState = {firstName: '', lastName: '', email: '', password: '', confirmPassword: ''};
     const classes = useStyles();
