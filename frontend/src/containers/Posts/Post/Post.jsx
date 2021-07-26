@@ -17,7 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcone from '@material-ui/icons/MoreHoriz';
 import {useDispatch} from "react-redux";
 import {deletePost, likePost} from "../../../store/actions/posts";
-import ConfirmDialog from '../../Shared/ConfirmDialog/ConfirmDialog';
+import ConfirmDialog from '../../../components/Shared/ConfirmDialog/ConfirmDialog';
 import dummyFile from "../../../assets/images/dummy-file.png";
 import {useHistory} from 'react-router-dom';
 

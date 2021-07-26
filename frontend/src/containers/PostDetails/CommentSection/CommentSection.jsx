@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 
 import {createPostComment, deletePostComment} from '../../../store/actions/posts';
 import useStyles from '../styles';
-import ConfirmDialog from "../../Shared/ConfirmDialog/ConfirmDialog";
+import ConfirmDialog from "../../../components/Shared/ConfirmDialog/ConfirmDialog";
 
 const CommentSection = ({post}) => {
     const initialState = {name: '', body: '', postId: post._id};

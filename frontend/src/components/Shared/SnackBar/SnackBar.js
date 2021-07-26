@@ -30,7 +30,7 @@ const CustomizedSnackbars = ({severity, message, open_, variant, horizontal, ver
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: {vertical}, horizontal: {horizontal}}}>
+      <Snackbar anchorOrigin={{vertical: vertical, horizontal: horizontal}} open={open} autoHideDuration={6000} onClose={handleClose} >
         <Alert severity={severity} variant={variant}>{message}</Alert>
       </Snackbar>
     </div>
