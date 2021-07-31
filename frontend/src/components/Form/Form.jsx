@@ -36,11 +36,14 @@ const Form = ({currentId, setCurrentId}) => {
         e.preventDefault();
 
         if (currentId === 0 || currentId == null) {
-            dispatch(createPosts({...postData, name: `${user?.result?.firstName} ${user?.result?.lastName}`}, history));
+            dispatch(createPosts({
+                ...postData,
+                name: `${user?.result?.firstName || user?.result?.givenName} ${user?.result?.lastName || user?.result?.familyName}`
+            }, history));
         } else {
             dispatch(updatePost(currentId, {
                 ...postData,
-                name: `${user?.result?.firstName} ${user?.result?.lastName}`
+                name: `${user?.result?.firstName || user?.result?.givenName} ${user?.result?.lastName || user?.result?.familyName}`
             }));
         }
         clear();
@@ -51,7 +54,7 @@ const Form = ({currentId, setCurrentId}) => {
         setExpanded(false);
 
     };
-    if (!user?.result?.firstName && !user?.result?.lastName) {
+    if (!user?.result?.email) {
         return (<Paper className={classes.paper}>
             <br/> <Typography variant="h6" align="center" color="textSecondary"> Please Sign In To Create Your Own
             Memories and Like Other Memories.</Typography><br/>

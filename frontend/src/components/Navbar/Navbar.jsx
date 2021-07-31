@@ -38,10 +38,10 @@ const Navbar = () => {
             </div>
             <Toolbar className={classes.toolbar}>
                 {user ? (
-                        <div className={classes.profile}><Avatar className={classes.pink} alt={user.result.firstName}
-                                                                 src={user.result.imageUrl}>{user.result.firstName.charAt(0)}</Avatar>
+                        <div className={classes.profile}><Avatar className={classes.pink} alt={user.result?.firstName || user.result?.givenName}
+                                                                 src={user.result.imageUrl}>{user.result.googleId ? user.result?.givenName.charAt(0) : user.result?.firstName.charAt(0)}</Avatar>
                             <Typography className={classes.userName}
-                                        variant="h6">{user.result.firstName} {user.result.lastName}</Typography>
+                                        variant="h6">{user.result.firstName || user.result?.givenName} {user.result?.lastName || user.result?.familyName}</Typography>
                             <Button variant="contained" className={classes.logOut} color="secondary"
                                     onClick={logout}>Logout</Button>
                         </div>) :

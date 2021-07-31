@@ -20,7 +20,7 @@ const CommentSection = ({post}) => {
     const handleSubmitComment = async () => {
        await dispatch(createPostComment({
             ...comment,
-            name: `${user?.result?.firstName} ${user?.result?.lastName}`
+            name: `${user?.result?.firstName || user?.result?.givenName} ${user?.result?.lastName || user?.result?.familyName}`
         }, post._id));
         // setComment(initialState);
 
@@ -53,7 +53,7 @@ const CommentSection = ({post}) => {
                 <div ref={commentsRef}/>
                 {comments?.length < 1 ? <div><br/><br/><br/><br/><br/></div> : <div><br/><br/><br/></div>}
             </div>
-            {user?.result?.firstName &&
+            {user?.result?.email &&
             <div style={{width: '70%'}}>
                 <Typography gutterBottom variant="h6">Leave a Comment</Typography>
                 <TextField fullWidth rows={4} variant="outlined" label="Comment" multiline value={comment.body}

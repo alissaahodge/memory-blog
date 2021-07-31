@@ -8,6 +8,8 @@ import {GoogleLogin} from "react-google-login";
 import Icon from './Icon';
 import Input from './Input';
 import {signin, signup} from '../../store/actions/auth';
+import {GOOGLE_CLIENT_ID} from '../../constants/environment';
+
 const Auth = () => {
     const initialState = {firstName: '', lastName: '', email: '', password: '', confirmPassword: ''};
     const classes = useStyles();
@@ -84,14 +86,15 @@ const Auth = () => {
                     <Button type="submit" fullWidth variant="contained" className={classes.submit} color="primary">
                         {isSignup ? 'Sign Up' : 'Sign In'}
                     </Button>
-                    <GoogleLogin clientId="GOOGLE ID" render={(renderProps) => (<Button className={classes.googleButton}
-                                                                                        fullWidth
-                                                                                        onClick={renderProps.onClick}
-                                                                                        disabled={renderProps.disabled}
-                                                                                        startIcon={<Icon/>}
-                                                                                        variant="contained"> Google Sign
-                        In
-                    </Button>)}
+                    <GoogleLogin clientId={GOOGLE_CLIENT_ID}
+                                 render={(renderProps) => (<Button className={classes.googleButton}
+                                                                   fullWidth
+                                                                   onClick={renderProps.onClick}
+                                                                   disabled={renderProps.disabled}
+                                                                   startIcon={<Icon/>}
+                                                                   variant="contained"> Google Sign
+                                     In
+                                 </Button>)}
                                  onSuccess={googleSuccess} onFailure={googleFailure} cookiePolicy="single_host_origin"
                     />
                     <Grid container justifyContent="flex-end">
