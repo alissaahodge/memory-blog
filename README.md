@@ -35,3 +35,21 @@ In a separate console, navigate to the backend directory:
 
 Launches the test runner in the interactive watch mode.\
 
+
+### Screenshots
+##### Home
+<code>
+  <img src='https://github.com/alissaahodge/memory-blog/blob/master/ReadMeImages/Screenshot%202021-08-04%20at%207.46.27%20AM.png?raw=true'/>
+  </code>
+  
+  
+##### Signup/Login
+<code>
+  <img src='https://github.com/alissaahodge/memory-blog/blob/master/ReadMeImages/Screenshot%202021-08-04%20at%207.46.43%20AM.png?raw=true'/>
+  </code>
+
+
+##### Post Details
+<code>
+  <img src='https://github.com/alissaahodge/memory-blog/blob/master/ReadMeImages/Screenshot%202021-08-04%20at%207.50.54%20AM.png?raw=true'/>
+  </code>
